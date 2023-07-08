@@ -46,31 +46,31 @@ export function confirmar(urla, id, titulo, mensaje) {
 
 
 }
-export function agregartareaaproyceto(parametros){
+export function agregartareaaproyceto(parametros) {
   axios.post("http://127.0.0.1:8000/api/v1/crearTarea", parametros)
-  .then(function(response) {
-    // Manejar la respuesta exitosa aquí
-    console.log(response.data);
-    window.location.reload();
-  })
-  .catch(function(error) {
-    // Manejar el error aquí
-    console.log(error);
-  });
+    .then(function (response) {
+      // Manejar la respuesta exitosa aquí
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch(function (error) {
+      // Manejar el error aquí
+      console.log(error);
+    });
 
 }
 
-export function agregarusuarioaproyceto(parametros){
+export function agregarusuarioaproyceto(parametros) {
   axios.post("http://127.0.0.1:8000/api/v1/asignarProyecto", parametros)
-  .then(function(response) {
-    // Manejar la respuesta exitosa aquí
-    console.log(response.data);
-    window.location.reload();
-  })
-  .catch(function(error) {
-    // Manejar el error aquí
-    console.log(error);
-  });
+    .then(function (response) {
+      // Manejar la respuesta exitosa aquí
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch(function (error) {
+      // Manejar el error aquí
+      console.log(error);
+    });
 
 }
 
@@ -80,8 +80,8 @@ export function enviarsolicitudeditar(metodo, parametros, url, mensaje) {
   })
     .then(function (res) {
       var estado = res.status;
- 
-     
+
+
 
       if (estado === 200 || estado === 201) {
         mostraralerta(mensaje, 'success');
@@ -100,7 +100,7 @@ export function enviarsolicitudborrartarea(metodo, parametros, url, mensaje) {
     method: metodo, url, data: parametros,
   })
     .then(function (res) {
-     var estado=res.status
+      var estado = res.status
 
       if (estado === 200 || estado === 201) {
         mostraralerta(mensaje, 'success');
@@ -120,20 +120,20 @@ export function enviarsolicitud(metodo, parametros, url, mensaje) {
   })
     .then(function (res) {
       var estado = res.status;
-      var proyectoId=""+res.data.id;
+      var proyectoId = "" + res.data.id;
 
       var parametrosacosiar = {
         user_id: parametros.id_user,
-        proyecto_id:proyectoId,
+        proyecto_id: proyectoId,
         rol: parametros.rol
       };
       console.log(parametrosacosiar)
       axios.post("http://127.0.0.1:8000/api/v1/asignarProyecto", parametrosacosiar)
-        .then(function(response) {
+        .then(function (response) {
           // Manejar la respuesta exitosa aquí
           console.log(response.data);
         })
-        .catch(function(error) {
+        .catch(function (error) {
           // Manejar el error aquí
           console.log(error);
         });
@@ -253,6 +253,20 @@ export function logout(url) {
       mostraralerta('Error en el inicio de sesión', 'error');
       throw error; // Lanza el error para que pueda ser manejado en el componente Vue
     });
+}
+
+export function elminarusariodeunrpoyceto(id_user, id_proyecto) {
+ axios.delete("http://127.0.0.1:8000/api/v1/elminarusariodeunrpoyceto/"+id_user+"/"+id_proyecto)
+    .then(function (response) {
+      // Manejar la respuesta exitosa aquí
+      console.log(response.data);
+      window.location.reload();
+    })
+    .catch(function (error) {
+      // Manejar el error aquí
+      console.log(error);
+    });
+
 }
 
 

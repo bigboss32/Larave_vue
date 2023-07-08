@@ -135,8 +135,8 @@ class UserController extends Controller
     {
        
         $user = User::findOrFail($id_proyecto);
-        $proyectos = $user->proyectos;
-
+        $proyectos = $user->proyectos()->withPivot('rol')->get();
+    
         return response()->json($proyectos);
     }
 

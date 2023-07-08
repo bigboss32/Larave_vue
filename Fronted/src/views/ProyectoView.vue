@@ -86,7 +86,7 @@
                   <td>
                     <button
                       class="btn btn-danger"
-                      v-on:click="($event) => eliminar(pro.id, pro.nombre)"
+                      v-on:click="($event) => eliminarusuariodeproyecto(usuario.id,id)"
                     >
                       <i class="fa-solid fa-trash"></i>
                     </button>
@@ -173,7 +173,9 @@
                     &nbsp;
                     <button
                       class="btn btn-danger"
-                      v-on:click="($event) => eliminartarea( item.id, item.título)"
+                      v-on:click="
+                        ($event) => eliminartarea(item.id, item.título)
+                      "
                     >
                       <i class="fa-solid fa-trash"></i>
                     </button>
@@ -331,7 +333,8 @@ import {
   enviarsolicitud,
   agregartareaaproyceto,
   agregarusuarioaproyceto,
-  confirmar
+  confirmar,
+  elminarusariodeunrpoyceto,
 } from "../funciones";
 import { useRoute } from "vue-router";
 
@@ -437,6 +440,11 @@ export default {
       );
       this.cargando = false;
     },
+    eliminarusuariodeproyecto(id_user,id_proyecto){
+      console.log(id_user)
+      console.log(id_proyecto)
+      elminarusariodeunrpoyceto(id_user,id_proyecto)
+    }
   },
 };
 </script>
