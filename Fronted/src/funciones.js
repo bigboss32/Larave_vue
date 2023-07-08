@@ -182,30 +182,6 @@ export function registarusu(metodo, parametros, url, mensaje) {
     });
 }
 
-export function Iniciosesion(metodo, parametros, url, mensaje) {
-  axios({ method: metodo, url, data: parametros })
-    .then(function (res) {
-      var estado = res.status;
-      console.log(estado)
-      if (estado === 200 || estado === 201) {
-
-        const token = res.data.token;
-        console.log(token)
-        localStorage.setItem('token', token); // Guarda el token en localStorage
-
-        axios.defaults.headers.common['Authorization'] = 'Bearer ' + token;
-        console.log('Inicio de sesión exitoso'); // Corrige el error aquí
-
-        router.push({ path: '/home', query: { token } });
-
-      } else {
-        mostraralerta('No se realizó', 'error');
-      }
-    })
-    .catch(function (error) {
-      mostraralerta('Servidor no disponible' + error);
-    });
-}
 
 
 export function sesion(parametros, url, mensaje) {
@@ -267,6 +243,16 @@ export function elminarusariodeunrpoyceto(id_user, id_proyecto) {
       console.log(error);
     });
 
+}
+
+export  function verificartoken(){
+  axios.interceptors.request.use(config => {
+    const token = localStorage.getItem('token');
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+    }
+    return config;
+  });
 }
 
 

@@ -79,7 +79,7 @@
 
 <script>
 import axios from "axios";
-import { confirmar } from "../funciones";
+import { confirmar,verificartoken } from "../funciones";
 
 export default {
   data() {
@@ -92,6 +92,7 @@ export default {
   },
   mounted() {
     this.getproyectos();
+    this.verificar()
   },
   computed: {
     proyectosFiltrados() {
@@ -135,6 +136,9 @@ export default {
         "realmente desea elminar a " + nombre + "?"
       );
       this.cargando = false;
+    },
+    verificar(){
+      verificartoken()
     },
   },
 };

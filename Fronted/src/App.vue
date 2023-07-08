@@ -56,22 +56,30 @@
 </nav>
 <div class="container-fluid">
 
-  <router-view />
+  
 </div>
- 
+<router-view />
 </template>
 
 <script>
+import axios from 'axios';
+
 import router from './router';
-import { mostraralerta, enviarsolicitud,Iniciosesion,sesion,logout} from './funciones';
 export default {
+  created() {
+    axios.interceptors.request.use(config => {
+      const token = localStorage.getItem('token');
+      console.log(token+'de app')
+      if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
+      }
+      return config;
+    });
+  },
   methods: {
     salir() {
-      
       localStorage.removeItem('token');
       router.push({ path: '/' });
-      // Realizar alguna acción adicional, como redireccionar al usuario a la página de inicio de sesión
-      
     }
   }
 }

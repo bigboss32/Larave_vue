@@ -16,6 +16,7 @@ class User extends Authenticatable
     protected $rememberTokenName = 'remember_token';
     public function proyectos(){
         return $this->belongsToMany(Proyecto::class,'proyecto_user');
+        
     }
     /**
      * The attributes that are mass assignable.
